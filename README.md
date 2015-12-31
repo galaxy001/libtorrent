@@ -28,6 +28,8 @@ See also <https://github.com/santazhang/BitTorrent-5.3-GPL> and <https://github.
 pip install ./python_BTL_BitTorrent-5.3-GPL/
 ````
 
+There are [some 4.40 patches](gentoo-portage/net-p2p/bittorrent/files) that newer than 5.30. Considering merge them later.
+
 ### Gentoo Packages
 
 #### net-p2p/bittornado
