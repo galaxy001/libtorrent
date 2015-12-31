@@ -21,11 +21,15 @@ from BitTornado.bencode import bdecode
 import sys
 from os import getcwd
 from os.path import join, isdir
+
 try:
-    from wxPython.wx import *
-except:
-    print 'wxPython is either not installed or has not been installed properly.'
+    import wxversion
+    wxversion.select("2.6")
+except Exception, e:
+    print >> sys.stderr, "%s: wxPython 2.6 not installed." %e
     sys.exit(1)
+
+from wxPython.wx import *
 
 try:
     True

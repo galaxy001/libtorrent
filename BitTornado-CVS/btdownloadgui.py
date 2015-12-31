@@ -17,10 +17,13 @@ from sys import argv, version, exit
 assert version >= '2', "Install Python 2.0 or greater"
 
 try:
-    from wxPython.wx import *
-except:
-    print 'wxPython is either not installed or has not been installed properly.'
-    exit(1)
+    import wxversion
+    wxversion.select("2.6")
+except Exception, e:
+    print >> sys.stderr, "%s: wxPython 2.6 not installed." %e
+    sys.exit(1)
+
+from wxPython.wx import *
 from BitTornado.download_bt1 import BT1Download, defaults, parse_params, get_usage, get_response
 from BitTornado.RawServer import RawServer, UPnP_ERROR
 from random import seed
