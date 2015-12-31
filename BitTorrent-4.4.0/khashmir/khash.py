@@ -8,7 +8,10 @@
 # for the specific language governing rights and limitations under the
 # License.
 
-from sha import sha
+try:
+    from hashlib import sha1 as sha
+except ImportError:
+    from sha import sha
 from random import randint
 
 #this is ugly, hopefully os.entropy will be in 2.4

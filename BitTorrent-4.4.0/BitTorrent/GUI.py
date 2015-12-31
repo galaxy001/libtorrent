@@ -25,9 +25,9 @@ from BitTorrent import app_name, FAQ_URL, languages, language_names
 from BitTorrent.platform import image_root, read_language_file, write_language_file
 
 def lock_wrap(function, *args):
-    gtk.threads_enter()
+    gtk.gdk.threads_enter()
     function(*args)
-    gtk.threads_leave()
+    gtk.gdk.threads_leave()
 
 def gtk_wrap(function, *args):
     gobject.idle_add(lock_wrap, function, *args)
@@ -377,10 +377,10 @@ class AutoScrollingWindow(ScrolledWindow):
 
     def scroll_and_wait(self, amount, lock_held):
         if not lock_held:
-            gtk.threads_enter()
+            gtk.gdk.threads_enter()
         self.scroll_by(0, amount)
         if not lock_held:
-            gtk.threads_leave()
+            gtk.gdk.threads_leave()
         if self.vscrolltimeout is not None:
             gobject.source_remove(self.vscrolltimeout)
         self.vscrolltimeout = gobject.timeout_add(100, self.scroll_and_wait, amount, False)

@@ -15,7 +15,10 @@ import sys
 import zurllib
 import pickle
 import threading
-from sha import sha
+try:
+    from hashlib import sha1 as sha
+except ImportError:
+    from sha import sha
 
 DEBUG = False
 
@@ -128,6 +131,9 @@ class Updater(object):
 
 
     def get(self):
+        self.debug('Skipping version check')
+        return
+
         try:
             self.get_available()
         except BTFailure, e:
@@ -163,7 +169,7 @@ class Updater(object):
             self.threadwrap(self.errorfunc, WARNING, '\n'.join(terrors))
 
         if torrentfile and signature:
-            public_key_file = open(os.path.join(doc_root, 'public.key'), 'rb')
+            public_key_file = open('/etc/pki/bittorrent/public.key', 'rb')
             public_key = pickle.load(public_key_file)
             h = sha(torrentfile).digest()
             if public_key.verify(h, signature):

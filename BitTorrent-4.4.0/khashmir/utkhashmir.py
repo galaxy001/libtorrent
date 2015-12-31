@@ -13,7 +13,10 @@ from actions import *
 from khash import newID
 from krpc import KRPCProtocolError, KRPCFailSilently
 from cache import Cache
-from sha import sha
+try:
+    from hashlib import sha1 as sha
+except ImportError:
+    from sha import sha
 from util import *
 from threading import Thread
 from socket import gethostbyname

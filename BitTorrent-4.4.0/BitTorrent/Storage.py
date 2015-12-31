@@ -213,7 +213,7 @@ class Storage(object):
         resumefile.write(str(amount_done) + '\n')
         for x, x, filename in self.ranges:
             resumefile.write(str(os.path.getsize(filename)) + ' ' +
-                             str(os.path.getmtime(filename)) + '\n')
+                             str(int(os.path.getmtime(filename))) + '\n')
 
     def check_fastresume(self, resumefile, return_filelist=False,
                          piece_size=None, numpieces=None, allfiles=None):
@@ -237,7 +237,7 @@ class Storage(object):
             else:
                 raise BTFailure(_("Another program appears to have moved, renamed, or deleted the file, "
                                   "or %s may have crashed last time it was run.") % app_name)
-            if fsize > 0 and mtime != os.path.getmtime(filename):
+            if fsize > 0 and mtime != int(os.path.getmtime(filename)):
                 raise BTFailure(_("Another program appears to have modified the file, "
                                   "or %s may have crashed last time it was run.") % app_name)
             if size != fsize:

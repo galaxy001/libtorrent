@@ -13,7 +13,10 @@ from socket import gethostbyname
 
 from BitTorrent.platform import bttime as time
 
-from sha import sha
+try:
+    from hashlib import sha1 as sha
+except ImportError:
+    from sha import sha
 import re
 from BitTorrent.defaultargs import common_options, rare_options
 from BitTorrent.RawServer_magic import RawServer

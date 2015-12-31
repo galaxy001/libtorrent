@@ -19,7 +19,10 @@ import sys
 import threading
 import errno
 import gc
-from sha import sha
+try:
+    from hashlib import sha1 as sha
+except ImportError:
+    from sha import sha
 from socket import error as socketerror
 from random import seed
 from time import time

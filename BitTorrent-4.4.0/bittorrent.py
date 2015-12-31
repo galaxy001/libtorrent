@@ -2742,7 +2742,7 @@ class DownloadInfoFrame(object):
         if self.config['start_minimized']:
             self.mainwindow.iconify()
        
-        gtk.threads_enter()
+        gtk.gdk.threads_enter()
 
         self.mainwindow.set_border_width(0)
 
@@ -2942,7 +2942,7 @@ class DownloadInfoFrame(object):
 
         self.nag()
         
-        gtk.threads_leave()
+        gtk.gdk.threads_leave()
 
     def window_event(self, widget, event, *args):
         if event.changed_mask == gtk.gdk.WINDOW_STATE_ICONIFIED:
@@ -3758,14 +3758,14 @@ class MainLoop:
         self.mainwindow = None
         self.started = 0
         
-        gtk.threads_init()
+        gtk.gdk.threads_init()
 
     def set_mainwindow(self, mainwindow):
         self.mainwindow = mainwindow
 
     def run(self):
         self.mainwindow.traythread.start()
-        gtk.threads_enter()        
+        gtk.gdk.threads_enter()        
 
         if self.mainwindow:
             self.mainwindow.ssbutton.set_paused(self.mainwindow.config['pause'])
@@ -3777,12 +3777,12 @@ class MainLoop:
             self.started = 1
             gtk.main() 
         except KeyboardInterrupt:
-            gtk.threads_leave()
+            gtk.gdk.threads_leave()
             if self.mainwindow:
                 self.mainwindow.torrentqueue.set_done()
             raise
         
-        gtk.threads_leave()
+        gtk.gdk.threads_leave()
 
     def quit(self):
         if self.mainwindow: 

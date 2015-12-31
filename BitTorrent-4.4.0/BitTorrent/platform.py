@@ -94,7 +94,7 @@ elif os_name == 'posix':
 def calc_unix_dirs():
     appdir = '%s-%s'%(app_name, version)
     ip = os.path.join('share', 'pixmaps', appdir)
-    dp = os.path.join('share', 'doc'    , appdir)
+    dp = os.path.join('share', 'doc'    , '')
     lp = os.path.join('share', 'locale')
     return ip, dp, lp
 

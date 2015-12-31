@@ -12,7 +12,10 @@
 
 from __future__ import division
 
-from sha import sha
+try:
+    from hashlib import sha1 as sha
+except ImportError:
+    from sha import sha
 from array import array
 from binascii import b2a_hex
 

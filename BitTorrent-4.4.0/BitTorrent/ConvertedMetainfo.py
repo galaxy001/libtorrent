@@ -15,7 +15,10 @@ from __future__ import generators
 
 import os
 import sys
-from sha import sha
+try:
+    from hashlib import sha1 as sha
+except ImportError:
+    from sha import sha
 
 from BitTorrent.obsoletepythonsupport import *
 

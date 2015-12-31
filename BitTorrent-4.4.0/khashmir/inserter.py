@@ -28,7 +28,6 @@ def d(n):
     done = done+1
     
 if __name__=="__main__":
-    global done
     host, port = sys.argv[1:]
     x = UTKhashmir("", 22038, "/tmp/cgcgcgc")
     x.addContact(host, int(port))

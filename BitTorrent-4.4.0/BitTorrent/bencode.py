@@ -14,6 +14,8 @@ from BitTorrent.obsoletepythonsupport import *
 
 from BitTorrent import BTFailure
 
+import string
+
 def decode_int(x, f):
     f += 1
     newf = x.index('e', f)
@@ -23,6 +25,23 @@ def decode_int(x, f):
             raise ValueError
     elif x[f] == '0' and newf != f+1:
         raise ValueError
+    return (n, newf+1)
+
+def assert_finite(n):
+  """Raises ValueError if n is NaN or infinite."""
+
+  valid_chars = '0123456789.-+eE'
+  if repr(n).translate(string.maketrans('',''), valid_chars) != '':
+    raise ValueError('encountered NaN or infinite')
+
+def decode_float(x, f):
+    f += 1
+    newf = x.index('e', f)
+    try:
+        n = float(x[f:newf].replace('E', 'e'))
+        assert_finite(n)
+    except (OverflowError, ValueError):
+        raise ValueError('encountered NaN or infinite')
     return (n, newf+1)
 
 def decode_string(x, f):
@@ -55,6 +74,7 @@ decode_func = {}
 decode_func['l'] = decode_list
 decode_func['d'] = decode_dict
 decode_func['i'] = decode_int
+decode_func['f'] = decode_float
 decode_func['0'] = decode_string
 decode_func['1'] = decode_string
 decode_func['2'] = decode_string
@@ -75,7 +95,7 @@ def bdecode(x):
         raise BTFailure, _("invalid bencoded value (data after valid prefix)")
     return r
 
-from types import StringType, IntType, LongType, DictType, ListType, TupleType
+from types import StringType, IntType, LongType, DictType, ListType, TupleType, FloatType
 
 
 class Bencached(object):
@@ -90,6 +110,10 @@ def encode_bencached(x,r):
 
 def encode_int(x, r):
     r.extend(('i', str(x), 'e'))
+
+def encode_float(x, r):
+    assert_finite(x)
+    r.extend(('f', repr(x).replace('e', 'E'), 'e'))
 
 def encode_bool(x, r):
     if x:
@@ -119,6 +143,7 @@ encode_func = {}
 encode_func[Bencached] = encode_bencached
 encode_func[IntType] = encode_int
 encode_func[LongType] = encode_int
+encode_func[FloatType] = encode_float
 encode_func[StringType] = encode_string
 encode_func[ListType] = encode_list
 encode_func[TupleType] = encode_list

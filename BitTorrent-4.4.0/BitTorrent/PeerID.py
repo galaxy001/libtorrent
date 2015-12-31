@@ -11,7 +11,10 @@
 # Written by Matt Chisholm
 
 import os
-from sha import sha
+try:
+    from hashlib import sha1 as sha
+except ImportError:
+    from sha import sha
 from time import time
 try:
     getpid = os.getpid

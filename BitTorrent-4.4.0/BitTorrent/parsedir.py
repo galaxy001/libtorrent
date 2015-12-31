@@ -11,7 +11,10 @@
 # Written by John Hoffman and Uoti Urpala
 
 import os
-from sha import sha
+try:
+    from hashlib import sha1 as sha
+except ImportError:
+    from sha import sha
 
 from BitTorrent.bencode import bencode, bdecode
 from BitTorrent.btformats import check_message
