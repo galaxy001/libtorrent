@@ -2,12 +2,30 @@
 
 ## Sources
 
-BitTorrent & BitTornado
+### BitTorrent & BitTornado
+
 ````
 rsync -a rsync://rsync.gentoo.org/gentoo-portage/net-p2p/ ./gentoo-portage/net-p2p/
 
 ftp://ftp.cn.debian.org/gentoo/distfiles/BitTorrent-4.4.0.tar.gz
 http://download2.bittornado.com/download/BitTornado-0.3.18.tar.gz, http://www.bittornado.com/download.html
+````
+
+#### BitTorrent 5.3 source code
+
+Available from [Internet Archive 2010-05-30](http://web.archive.org/web/20100330145634/http://www.bittorrent.com/btusers/download/directory-list)
+
+````
+BitTorrent-5.3-GPL.tar.gz	February 4, 2009, 6:01 pm
+````
+
+Available till [2010-08-31](http://web.archive.org/web/20100831070823/http://www.bittorrent.com/btusers/download/directory-list).  
+See also <https://github.com/santazhang/BitTorrent-5.3-GPL> and <https://github.com/kenorb-contrib/BitTorrent> ([mirrored](https://github.com/galaxysd/BitTorrent)).
+
+##### Install BTL-0.31dev-r0 from BitTorrent-5.3-GPL
+
+````bash
+pip install ./python_BTL_BitTorrent-5.3-GPL/
 ````
 
 ### Gentoo Packages
