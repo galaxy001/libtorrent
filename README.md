@@ -25,8 +25,11 @@ See also <https://github.com/santazhang/BitTorrent-5.3-GPL> and <https://github.
 ##### Install BTL-0.31dev-r0 from BitTorrent-5.3-GPL
 
 ````bash
-pip install ./python_BTL_BitTorrent-5.3-GPL/
+python2 -m ensurepip --upgrade
+pip2 install ./python_BTL_BitTorrent-5.3-GPL/
 ````
+
+Remember `cfv` requires Python2.
 
 There are [some 4.4.0 patches](gentoo-portage/net-p2p/bittorrent/files) that newer than 5.30. Considering merge them later.
 
@@ -61,6 +64,6 @@ CVE-2015-5474 (http://nvd.nist.gov/nvd.cfm?cvename=CVE-2015-5474):
   arbitrary commands via a crafted URL using the (1) bittorrent or (2) magnet protocol.
 ````
 
-
+Well, the 2010 version should *contain* this bug.
 
 
